@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beranda Bimbel Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f5f9ff;
+    }
+
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+    .hero-footer {
+  width: 100%;
+  background: linear-gradient(to right, #0d47a1, #1565c0);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 80px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -6px 20px rgba(0,0,0,0.2);
+}
+
+.hero-footer h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.hero-footer p {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+.mini-hero {
+  margin-top: 25px;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  text-align: center;
+  padding: 12px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.mini-hero h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #0d47a1;
+  font-weight: 700;
+}
+
+.mini-hero p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+
+   .topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(to right, #90caf9cc, #42a5f5cc);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 30px; /* ditingkatkan */
+  gap: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border-bottom: none;
+  border-radius: 0 0 25px 25px; /* membulat ke bawah */
+}
+
+
+    .nav-link,
+    .dropdown > a {
+      padding: 8px 12px;
+      background: linear-gradient(to bottom right, #e3f2fd, #64b5f6);
+      color: #000;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .topbar {
+  width: 95%;
+  margin: 10px auto 0;
+  border-radius: 20px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+    .nav-link:hover,
+    .dropdown > a:hover {
+      background: linear-gradient(to bottom right, #90caf9, #42a5f5);
+      transform: translateY(-2px);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #e3f2fd;
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 999;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 6px 14px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+
+    .dropdown-content a:hover {
+      background: #64b5f6;
+    }
+
+    .main {
+      padding: 200px 20px 40px 20px;
+    }
+
+    .hero {
+  position: fixed;
+  top: 140px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background: linear-gradient(to right, #1565c0cc, #0d47a1cc);
+  color: white;
+  padding: 40px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center; /* ini menengahkan isi */
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.hero {
+  position: fixed;
+  top: 110px; /* turun di bawah topbar */
+  left: 0;
+  right: 0;
+  z-index: 99;
+  ...
+}
+
+.main {
+  padding: 240px 20px 40px 20px;
+}
+
+
+    .hero img {
+      height: 60px;
+    }
+
+    .hero h1 {
+      margin: 0;
+    }
+
+    .media-gallery {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .media-block {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .media-block.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .media-block h3 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .slideshow {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .slideshow img {
+      width: 100%;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .slideshow img.active {
+      display: block;
+    }
+
+    .video-block video {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .tutor-4d {
+      margin-top: 60px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .tutor-4d.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tutor-4d h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .tutor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .tutor-card {
+      background: linear-gradient(to right bottom, #1e88e5, #1565c0);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .tutor-card:hover {
+      transform: rotateY(10deg) scale(1.05);
+    }
+
+    .tutor-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .tutor-card h4 {
+      margin: 10px 0 5px;
+    }
+
+    .tutor-card p {
+      font-size: 0.9em;
+      opacity: 0.9;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+    }
+     .floating-daftar {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      padding: 12px 20px;
+      background-color: #1976d2;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .floating-daftar:hover {
+      background-color: #0b3c91;
+      transform: scale(1.05);
+    }
+     .floating-contact {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    .floating-contact a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background-color: white;
+      border-radius: 24px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      text-decoration: none;
+      color: #000;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .floating-contact a:hover {
+      transform: scale(1.05);
+      background-color: #e3f2fd;
+    }
+
+    .floating-contact img {
+      width: 24px;
+      height: 24px;
+    }
+     .floating-search {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 999;
+  background: linear-gradient(145deg, #e3f2fd, #64b5f6);
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: 6px 6px 12px rgba(0,0,0,0.2);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.floating-search input {
+  border: none;
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 180px;
+}
+.floating-search button {
+  border: none;
+  background-color: #1e88e5;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.floating-search button:hover {
+  transform: scale(1.05);
+  background-color: #00796b;
+}
+
+    .testimonial-gallery {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .testimonial-gallery h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .testimonial-item {
+      background: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .testimonial-item:hover {
+      transform: scale(1.05);
+    }
+
+    .testimonial-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+     .tutor-card {
+      background: linear-gradient(to right bottom, #1e88e5, #1565c0);
+      color: white;
+      padding: 24px;
+      border-radius: 24px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+      width: 240px;
+      height: 300px;
+    }
+
+    .tutor-card:hover {
+      transform: rotateY(10deg) scale(1.05);
+    }
+
+    .tutor-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .tutor-card h4 {
+      font-size: 1.2em;
+      margin: 12px 0 6px;
+    }
+
+    .tutor-card p {
+      font-size: 1em;
+      opacity: 0.95;
+    }
+.tutor-socials {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.tutor-socials a img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+}
+
+.tutor-socials a:hover img {
+  transform: scale(1.1);
+}
+
+  
+.floating-logo {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  z-index: 1000;
+  background: white;
+  padding: 10px;
+  border-radius: 100px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s;
+}
+.floating-logo img {
+  width: 150px;
+  height: 150px;
+}
+.floating-logo:hover {
+  transform: scale(1.08);
+}
+
+
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 15px;
+  }
+
+  .main {
+    padding: 240px 15px 40px 15px;
+  }
+
+  .media-gallery {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tutor-grid, .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-search,
+  .floating-daftar,
+  .dark-toggle {
+    right: 10px;
+    left: auto;
+  }
+
+  .floating-contact {
+    left: 10px;
+    bottom: 70px;
+  }
+
+  .floating-search {
+    flex-direction: column;
+    width: calc(100% - 40px);
+    top: 80px;
+  }
+
+  .floating-search input,
+  .floating-search button {
+    width: 100%;
+  
+}
+.floating-footer {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background: linear-gradient(to right, #0d47a1, #42a5f5);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 1000;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.tutor-socials {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- Floating Logo -->
+<div class="floating-logo">
+  <img src="https://www.logoai.com/oss/icons/2021/12/02/u8tXD2V7rro6bok.png" alt="Logo RBM">
+</div>
+
+ <div class="topbar">
+     <h3>Pilih Menu</h3>
+    <a href="#" class="nav-link">📘 Home</a>
+    <a href="#" class="nav-link">🎁 Tutor Profile</a>
+    <a href="#" class="nav-link">📅 SIA Tutor</a>
+    <a href="#" class="nav-link">🎓 Testimonials</a>
+    <a href="#" class="nav-link">💬 Online Quiz</a>
+    <div class="dropdown">
+      <a href="#" onclick="toggleMenu(event)">📁 Subjects ▼</a>
+      <div class="dropdown-content">
+        <a href="#">Mathematics</a>
+        <a href="#">B.English</a>
+        <a href="#">Thematic</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" onclick="toggleMenu(event)">📚 UTBK Program ▼</a>
+      <div class="dropdown-content">
+        <a href="#">UTBK</a>
+        <a href="#">Mandiri</a>
+      </div>
+    </div>
+    <a href="#" class="nav-link">📖 Reading Room</a>
+  </div>
+  <div class="floating-search">
+  <input type="text" placeholder="Cari pelajaran...">
+  <button>Cari</button>
+</div>
+  <div class="main">
+    
+    <div class="hero">
+
+      <div><h1>RBM Algebra </h1></div>
+      <div><h2>(Teaching and Learning Home)</h2></div>
+    </div>
+<div class="mini-hero">
+  <h2>PRIVASI ONLINE</h2>
+  <p>(1 GURU - 1 SISWA)</p>
+</div>
+    <div class="media-gallery">
+      <div class="media-block">
+        <h3>Galeri Gambar</h3>
+        <div class="slideshow">
+          <img src="https://via.placeholder.com/500x300?text=Gambar+1" class="active" />
+          <img src="https://via.placeholder.com/500x300?text=Gambar+2" />
+          <img src="https://via.placeholder.com/500x300?text=Gambar+3" />
+        </div>
+      </div>
+      <div class="media-block video-block">
+        <h3>Video Edukasi</h3>
+        <video controls>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Browser Anda tidak mendukung video.
+        </video>
+      </div>
+      <div class="media-block video-block">
+        <h3>Video Edukasi</h3>
+        <video controls>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Browser Anda tidak mendukung video.
+        </video>
+      </div>
+    </div>
+
+    <div class="tutor-4d">
+      <h2>Profil Tutor (Model 4D)</h2>
+      <div class="tutor-grid">
+        <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+  <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+       <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+  <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+       <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+  <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+        <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+  <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+         <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+ <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+         <div class="tutor-card">
+  <img src="https://via.placeholder.com/80" alt="Tutor">
+  <h3>Afif H</h3>
+  <p>English | 08783443xxx</p>
+  <div class="tutor-socials">
+  <a href="https://instagram.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+  </a>
+  <a href="https://youtube.com/namauser" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+  </a>
+</div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+ <button class="dark-toggle" onclick="toggleDarkMode()">🌙/☀️ Mode</button>
+  <a href="#" class="floating-daftar">📝 Daftar Sekarang</a>
+  <div class="floating-contact">
+    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> WhatsApp</a>
+    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> Instagram</a>
+    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook"> Facebook</a>
+  </div>
+   <div class="testimonial-gallery">
+      <h2>Testimoni Siswa</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+1" alt="Testimoni 1">
+        </div>
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+2" alt="Testimoni 2">
+        </div>
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+3" alt="Testimoni 3">
+        </div>
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+4" alt="Testimoni 4">
+          </div>
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+4" alt="Testimoni 5">
+          </div>
+        <div class="testimonial-item">
+          <img src="https://via.placeholder.com/300x200?text=Testimoni+4" alt="Testimoni 6">
+        </div>
+      </div>
+
+
+
+  </div>
+  <script>
+    function toggleMenu(event) {
+      event.preventDefault();
+      const parent = event.target.closest('.dropdown');
+      parent.classList.toggle('active');
+    }
+
+    function toggleDarkMode() {
+      const body = document.body;
+      const isDark = body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+    }
+
+    window.onload = function () {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+      }
+
+      const slides = document.querySelectorAll(".slideshow img");
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+      }, 3000);
+
+      // Scroll-triggered animation
+      const animatedSections = document.querySelectorAll('.media-block, .tutor-4d');
+      function checkScroll() {
+        const triggerBottom = window.innerHeight * 0.9;
+        animatedSections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop < triggerBottom) {
+            section.classList.add('show');
+          }
+        });
+      }
+      window.addEventListener('scroll', checkScroll);
+      checkScroll();
+    };
+  </script>
+  <section class="hero-footer">
+  <h2>© 2025 RBM Algebra</h2>
+  <p>All Rights Reserved.</p>
+</section>
+
+
+</body>
+</html>
